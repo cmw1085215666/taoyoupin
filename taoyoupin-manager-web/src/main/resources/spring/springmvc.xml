@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--配置应用名 服务消费方-->
+    <dubbo:application name="pinyougou-manager-web"></dubbo:application>
+    <!--配置注册中心-->
+    <dubbo:registry protocol="zookeeper" address="192.168.182.128" port="2181"></dubbo:registry>
+    <!--引用服务 通过注解 @reference 扫描 即可引用 包含了组件扫描-->
+    <dubbo:annotation package="com.taoyoupin.manager.controller"></dubbo:annotation>
+
+    <!--注解驱动并设置统一日期的输出格式-->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes" value="application/json"/>
+                <property name="features">
+                    <array>
+                        <!--返回结果是包含null值  默认是过滤掉-->
+                        <value>WriteMapNullValue</value>
+                        <!--修改全局日期格式 默认是false 表示不修改，自己定义 配置在此处表示要统一日期格式输出 ，默认格式为：yyyy-MM-dd -->
+                        <!--JSON.DEFFAULT_DATE_FORMAT-->
+                        <value>WriteDateUseDateFormat</value>
+                    </array>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!--开启springmvc的包扫描-->
+    <!--<context:component-scan base-package="com.taoyoupin.manager.controller"></context:component-scan>-->
+
+    <!--加载映射器和适配器和json转换器-->
+    <!--<mvc:annotation-driven />-->
+
+    <!--添加视图的前缀和后缀-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+
+    <!--<bean id="handlerExceptionResolver" class="com.itheima.exception.CustomExceptionResolver"/>-->
+
+    <!--自定义的异常处理器如果在controller报下则不用配置<bean></bean>标签让spring托管-->
+    <!--<bean class="com.itheima.exception.MyExceptionHandler"></bean>-->
+
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+    <!--
+        如果使用default-servlet-handller 要求所有的静态资源必须放在webapp下 不能放到web-inf下
+        如果使用resources 可以自己指定物理路径 进行映射 甚至可以将静态资源放入web-inf也行
+    -->
+
+
+    <!--使用文件下载组件需要引入commons-fileupload依赖，并配置multipartResolver-->
+    <!--<bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        &lt;!&ndash; 设置上传文件的最大尺寸为5MB &ndash;&gt;
+        <property name="maxUploadSize" value="5242880"></property>
+        <property name="defaultEncoding" value="utf-8"></property>
+    </bean>-->
+
+
+    <!--自定义拦截器-->
+    <!--<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/**" ></mvc:exclude-mapping>
+            <mvc:exclude-mapping path="/"></mvc:exclude-mapping>
+            <bean class="com.itheima.interceptor.MyHandlerInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
+
+
+
+</beans>
