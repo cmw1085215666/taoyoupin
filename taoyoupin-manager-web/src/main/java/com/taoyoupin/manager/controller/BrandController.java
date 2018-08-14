@@ -70,4 +70,11 @@ public class BrandController {
         }
         return new Resutl(false,"删除失败");
     }
+
+
+    @RequestMapping("/search")
+    public PageResutl search(@RequestBody TbBrand tbBrand,Integer page, Integer rows){
+        return brandService.search(tbBrand,page,rows);
+    }
+
 }

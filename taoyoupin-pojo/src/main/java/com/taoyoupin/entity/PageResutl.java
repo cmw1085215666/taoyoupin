@@ -9,9 +9,9 @@ public class PageResutl implements Serializable {
 
     private Long total;
 
-    private List<TbBrand> rows;
+    private List rows;
 
-    public PageResutl(Long total, List<TbBrand> rows) {
+    public PageResutl(Long total, List rows) {
         this.total = total;
         this.rows = rows;
     }
@@ -24,11 +24,11 @@ public class PageResutl implements Serializable {
         this.total = total;
     }
 
-    public List<TbBrand> getRows() {
+    public List getRows() {
         return rows;
     }
 
-    public void setRows(List<TbBrand> rows) {
+    public void setRows(List rows) {
         this.rows = rows;
     }
 }

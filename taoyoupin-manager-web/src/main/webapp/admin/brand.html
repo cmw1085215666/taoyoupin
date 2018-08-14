@@ -33,8 +33,9 @@
 
 
         $scope.reLoadList=function(){
-            $scope.findPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage)
-		};
+            /*$scope.findPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);*/
+            $scope.search($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
+        };
 
         $scope.paginationConf = {
             currentPage: 1,
@@ -49,6 +50,17 @@
 
         $scope.findPage=function(page,rows) {
             $http.get('../brand/findPage.do?page=' + page + '&rows=' + rows).success(
+                function (response) {
+                    $scope.list = response.rows;
+                    $scope.paginationConf.totalItems = response.total;//更新总记录数
+                }
+            );
+        };
+
+        $scope.searchEntity={};//定义搜索对象为空对象防止传递给null的情况。
+
+        $scope.search=function(page,rows) {
+            $http.post('../brand/search.do?page=' + page + '&rows=' + rows,$scope.searchEntity).success(
                 function (response) {
                     $scope.list = response.rows;
                     $scope.paginationConf.totalItems = response.total;//更新总记录数
@@ -104,6 +116,7 @@
                 function(response){
                     if(response.success){
                         $scope.reLoadList();//刷新列表
+                        $scope.selectIds=[];
                     }
                 }
             );
@@ -123,7 +136,12 @@
                     </div>
 
                     <div class="box-body">
-
+						<div class="has-feedback">
+							品牌名称：<input type="text" ng-model="searchEntity.name">
+							首字母：<input type="text"   ng-model="searchEntity.firstChar">
+							<button class="btn btn-default"
+									ng-click="search(1,paginationConf.itemsPerPage)">搜索</button>
+						</div>
                         <!-- 数据表格 -->
                         <div class="table-box">
 
