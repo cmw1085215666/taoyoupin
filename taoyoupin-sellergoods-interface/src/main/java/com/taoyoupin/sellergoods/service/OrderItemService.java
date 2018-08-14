@@ -1,6 +1,6 @@
 package com.taoyoupin.sellergoods.service;
 import java.util.List;
-import com.taoyoupin.pojo.TbBrand;
+import com.taoyoupin.pojo.TbOrderItem;
 
 import entity.PageResult;
 /**
@@ -8,13 +8,13 @@ import entity.PageResult;
  * @author Administrator
  *
  */
-public interface BrandService {
+public interface OrderItemService {
 
 	/**
 	 * 返回全部列表
 	 * @return
 	 */
-	public List<TbBrand> findAll();
+	public List<TbOrderItem> findAll();
 	
 	
 	/**
@@ -27,13 +27,13 @@ public interface BrandService {
 	/**
 	 * 增加
 	*/
-	public void add(TbBrand brand);
+	public void add(TbOrderItem orderItem);
 	
 	
 	/**
 	 * 修改
 	 */
-	public void update(TbBrand brand);
+	public void update(TbOrderItem orderItem);
 	
 
 	/**
@@ -41,7 +41,7 @@ public interface BrandService {
 	 * @param id
 	 * @return
 	 */
-	public TbBrand findOne(Long id);
+	public TbOrderItem findOne(Long id);
 	
 	
 	/**
@@ -56,6 +56,6 @@ public interface BrandService {
 	 * @param pageSize 每页记录数
 	 * @return
 	 */
-	public PageResult findPage(TbBrand brand, int pageNum, int pageSize);
+	public PageResult findPage(TbOrderItem orderItem, int pageNum, int pageSize);
 	
 }

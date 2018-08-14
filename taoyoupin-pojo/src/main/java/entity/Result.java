@@ -1,14 +1,14 @@
-package com.taoyoupin.entity;
+package entity;
 
 import java.io.Serializable;
 
-public class Resutl implements Serializable {
+public class Result implements Serializable {
 
     private Boolean success;
 
     private String message;
 
-    public Resutl(Boolean success, String message) {
+    public Result(Boolean success, String message) {
         this.success = success;
         this.message = message;
     }

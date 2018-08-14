@@ -1,0 +1,1 @@
+var app=angular.module('taoyoupin', ['pagination']);//定义模块

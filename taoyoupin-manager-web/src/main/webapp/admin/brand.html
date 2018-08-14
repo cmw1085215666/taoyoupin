@@ -15,11 +15,16 @@
 
 	<script src="../plugins/angularjs/pagination.js"></script>
 	<script src="../plugins/angularjs/pagination.css"></script>
-    
+
+	<script src="../js/base_pagination.js"></script>
+	<script src="../service/brandService.js"></script>
+	<script src="../controller/baseController.js"></script>
+	<script src="../controller/brandController.js"></script>
+
 </head>
 <script type="text/javascript" >
-	/*var app = augular.module("taoyoupin",[]);*/
-    var app=angular.module('taoyoupin', ['pagination']);//定义模块
+	/*var app = augular.module("aoyotupin",[]);*/
+   /* var app=angular.module('taoyoupin', ['pagination']);//定义模块
 
     app.controller('brandController' ,function($scope,$http){
         //读取列表数据绑定到表单中
@@ -33,7 +38,7 @@
 
 
         $scope.reLoadList=function(){
-            /*$scope.findPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);*/
+            /!*$scope.findPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);*!/
             $scope.search($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
         };
 
@@ -123,7 +128,7 @@
         }
 
     });
-
+*/
 
 
 

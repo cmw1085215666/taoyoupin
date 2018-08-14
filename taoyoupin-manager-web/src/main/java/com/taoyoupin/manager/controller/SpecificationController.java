@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.taoyoupin.pojo.TbBrand;
-import com.taoyoupin.sellergoods.service.BrandService;
+import com.taoyoupin.pojo.TbSpecification;
+import com.taoyoupin.sellergoods.service.SpecificationService;
 
 import entity.PageResult;
 import entity.Result;
@@ -16,19 +16,19 @@ import entity.Result;
  *
  */
 @RestController
-@RequestMapping("/brand")
-public class BrandController {
+@RequestMapping("/specification")
+public class SpecificationController {
 
 	@Reference
-	private BrandService brandService;
+	private SpecificationService specificationService;
 	
 	/**
 	 * 返回全部列表
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbBrand> findAll(){			
-		return brandService.findAll();
+	public List<TbSpecification> findAll(){			
+		return specificationService.findAll();
 	}
 	
 	
@@ -38,18 +38,18 @@ public class BrandController {
 	 */
 	@RequestMapping("/findPage")
 	public PageResult  findPage(int page,int rows){			
-		return brandService.findPage(page, rows);
+		return specificationService.findPage(page, rows);
 	}
 	
 	/**
 	 * 增加
-	 * @param brand
+	 * @param specification
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody TbBrand brand){
+	public Result add(@RequestBody TbSpecification specification){
 		try {
-			brandService.add(brand);
+			specificationService.add(specification);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,13 +59,13 @@ public class BrandController {
 	
 	/**
 	 * 修改
-	 * @param brand
+	 * @param specification
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result update(@RequestBody TbBrand brand){
+	public Result update(@RequestBody TbSpecification specification){
 		try {
-			brandService.update(brand);
+			specificationService.update(specification);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,8 +79,8 @@ public class BrandController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbBrand findOne(Long id){
-		return brandService.findOne(id);		
+	public TbSpecification findOne(Long id){
+		return specificationService.findOne(id);		
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public class BrandController {
 	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
-			brandService.delete(ids);
+			specificationService.delete(ids);
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,14 +101,14 @@ public class BrandController {
 	
 		/**
 	 * 查询+分页
-	 * @param brand
+	 * @param specification
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbBrand brand, int page, int rows  ){
-		return brandService.findPage(brand, page, rows);		
+	public PageResult search(@RequestBody TbSpecification specification, int page, int rows  ){
+		return specificationService.findPage(specification, page, rows);		
 	}
 	
 }
