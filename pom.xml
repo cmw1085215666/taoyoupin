@@ -14,6 +14,7 @@
         <module>taoyoupin-sellergoods-interface</module>
         <module>taoyoupin-sellergoods-service</module>
         <module>taoyoupin-manager-web</module>
+        <module>taoyouqin-shop-web</module>
     </modules>
     <packaging>pom</packaging>
 
