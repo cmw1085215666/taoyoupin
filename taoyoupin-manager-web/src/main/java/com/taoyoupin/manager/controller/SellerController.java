@@ -1,6 +1,7 @@
 package com.taoyoupin.manager.controller;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +49,11 @@ public class SellerController {
 	 */
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbSeller seller){
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password = passwordEncoder.encode(seller.getPassword());
+        seller.setPassword(password);
+
 		try {
 			sellerService.add(seller);
 			return new Result(true, "增加成功");
