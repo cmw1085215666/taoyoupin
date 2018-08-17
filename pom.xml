@@ -300,12 +300,12 @@
                 <version>${activemq.version}</version>
             </dependency>
             <!--fastdfs客户端-->
-            <!--<dependency>
+            <dependency>
                 <groupId>org.csource.fastdfs</groupId>
                 <artifactId>fastdfs</artifactId>
 
                 <version>${fastdfs-client.versioin}</version>
-            </dependency>-->
+            </dependency>
             <!-- solr客户端 -->
             <dependency>
                 <groupId>org.apache.solr</groupId>

@@ -2,6 +2,7 @@ package com.taoyoupin.sellergoods.service;
 import java.util.List;
 import com.taoyoupin.pojo.TbGoods;
 
+import entity.Goods;
 import entity.PageResult;
 /**
  * 服务层接口
@@ -23,12 +24,11 @@ public interface GoodsService {
 	 */
 	public PageResult findPage(int pageNum, int pageSize);
 	
-	
+
 	/**
 	 * 增加
-	*/
-	public void add(TbGoods goods);
-	
+	 */
+	public void add(Goods goods);
 	
 	/**
 	 * 修改

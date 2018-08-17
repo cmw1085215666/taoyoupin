@@ -3,8 +3,10 @@ package com.taoyoupin.shop.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.taoyoupin.pojo.TbGoods;
 import com.taoyoupin.sellergoods.service.GoodsService;
+import entity.Goods;
 import entity.PageResult;
 import entity.Result;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,14 +43,17 @@ public class GoodsController {
 	public PageResult  findPage(int page,int rows){			
 		return goodsService.findPage(page, rows);
 	}
-	
+
 	/**
 	 * 增加
 	 * @param goods
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody TbGoods goods){
+	public Result add(@RequestBody Goods goods){
+		//获取登录名
+		String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
+		goods.getGoods().setSellerId(sellerId);//设置商家ID
 		try {
 			goodsService.add(goods);
 			return new Result(true, "增加成功");
@@ -57,7 +62,8 @@ public class GoodsController {
 			return new Result(false, "增加失败");
 		}
 	}
-	
+
+
 	/**
 	 * 修改
 	 * @param goods
