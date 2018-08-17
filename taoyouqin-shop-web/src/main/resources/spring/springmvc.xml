@@ -5,10 +5,12 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
+    <context:property-placeholder location="classpath:resouce.properties"></context:property-placeholder>
+
     <!--配置应用名 服务消费方-->
     <dubbo:application name="taoyoupin-shop-web"></dubbo:application>
     <!--配置注册中心-->
-    <dubbo:registry protocol="zookeeper" address="192.168.182.128" port="2181"></dubbo:registry>
+    <dubbo:registry protocol="zookeeper" address="192.168.25.133" port="2181"></dubbo:registry>
     <!--引用服务 通过注解 @reference 扫描 即可引用 包含了组件扫描-->
     <dubbo:annotation package="com.taoyoupin.shop.controller"></dubbo:annotation>
 
@@ -75,7 +77,10 @@
         </mvc:interceptor>
     </mvc:interceptors>-->
 
-
-
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+        <property name="maxUploadSize" value="5242880"></property>
+    </bean>
 
 </beans>

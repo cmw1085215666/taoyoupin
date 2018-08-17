@@ -1,5 +1,7 @@
 package com.taoyoupin.sellergoods.service;
 import java.util.List;
+import java.util.Map;
+
 import com.taoyoupin.pojo.TbTypeTemplate;
 
 import entity.PageResult;
@@ -57,5 +59,11 @@ public interface TypeTemplateService {
 	 * @return
 	 */
 	public PageResult findPage(TbTypeTemplate typeTemplate, int pageNum, int pageSize);
+
+	/**
+	 * 返回规格列表
+	 * @return
+	 */
+	public List<Map> findSpecList(Long id);
 	
 }

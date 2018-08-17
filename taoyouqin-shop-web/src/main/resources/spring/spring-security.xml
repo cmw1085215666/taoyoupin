@@ -34,7 +34,7 @@
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
     <!-- 引用dubbo 服务 -->
     <dubbo:application name="taoyoupin-shop-web" />
-    <dubbo:registry address="zookeeper://192.168.182.128:2181"/>
+    <dubbo:registry address="zookeeper://192.168.25.133:2181"/>
     <dubbo:reference id="sellerService"  interface="com.taoyoupin.sellergoods.service.SellerService" >
     </dubbo:reference>
     <beans:bean id="userDetailService" class="com.taoyoupin.service.UserDetailsServiceImpl">
