@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.taoyoupin.pojo.TbContent;
-import com.taoyoupin.sellergoods.service.ContentService;
+import com.taoyoupin.content.service.ContentService;
 
 import entity.PageResult;
 import entity.Result;

@@ -16,6 +16,12 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.taoyoupin</groupId>
+            <artifactId>taoyoupin-content-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--通用类-->
         <dependency>
             <groupId>com.taoyoupin</groupId>

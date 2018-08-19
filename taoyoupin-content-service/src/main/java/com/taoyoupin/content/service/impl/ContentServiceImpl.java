@@ -1,6 +1,5 @@
-package com.taoyoupin.sellergoods.service.impl;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.taoyoupin.content.service.impl;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -8,9 +7,11 @@ import com.taoyoupin.mapper.TbContentMapper;
 import com.taoyoupin.pojo.TbContent;
 import com.taoyoupin.pojo.TbContentExample;
 import com.taoyoupin.pojo.TbContentExample.Criteria;
-import com.taoyoupin.sellergoods.service.ContentService;
-
+import com.taoyoupin.content.service.ContentService;
 import entity.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * 服务实现层
