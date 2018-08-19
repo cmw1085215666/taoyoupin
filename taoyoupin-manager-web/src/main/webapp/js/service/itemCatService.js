@@ -30,8 +30,8 @@ app.service('itemCatService',function($http){
 		return $http.post('../itemCat/search.do?page='+page+"&rows="+rows, searchEntity);
 	}
 
-    //根据上级ID查询下级列表
+
     this.findByParentId=function(parentId){
-        return $http.get('../itemCat/findByParentId.do?parentId='+parentId);
+        return $http.post('../itemCat/findByParentId.do?parentId='+parentId);
     }
 });

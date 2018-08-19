@@ -42,7 +42,7 @@
      });*/
 </script>
 <body class="hold-transition skin-red sidebar-mini"
-      ng-app="pinyougou" ng-controller="goodsController" ng-init="selectItemCat1List()">
+      ng-app="pinyougou" ng-controller="goodsController" ng-init="selectItemCat1List();findOne()">
 
 <!-- 正文区域 -->
 <section class="content">
@@ -195,171 +195,215 @@
 
                 <!--扩展属性-->
                 <div class="tab-pane" id="customAttribute">
+
+
+
+                    <!--{{entity}}-->
+
+
+
                     <div class="row data-type">
                         <div ng-repeat="pojo in specList">
                             <div class="col-md-2 title">{{pojo.text}}</div>
                             <div class="col-md-10 data">
                                   <span ng-repeat="option in pojo.options">
-                                    <input type="checkbox">{{option.optionName}}
+                                    <input type="checkbox"
+                                           ng-click="updateSpecAttribute($event,pojo.text,option.optionName);createItemList()"
+                                           ng-checked="checkAttributeValue(pojo.text,option.optionName)">{{option.optionName}}
                                   </span>
                             </div>
                         </div>
                     </div>
+                    <!--{{entity.itemList}}-->
                 </div>
 
                 <!--规格-->
                 <div class="tab-pane" id="spec">
+
                     <div class="row data-type">
                         <div class="col-md-2 title">是否启用规格</div>
                         <div class="col-md-10 data">
+                            <!--<input type="checkbox" ng-model="entity.goods.isEnableSpec" ng-true-value="1"-->
+                                   <!--ng-false-value="0">-->
+                            <span ng-if="entity.goods.id!=null">
+                               <input type="checkbox" ng-model="entity.goods.isEnableSpec" ng-true-value="1" ng-false-value="0">
+                            </span>
+                             <span ng-if="entity.goods.id==null">
+                               <input type="checkbox" ng-model="entity.goods.isEnableSpec" ng-true-value="1" ng-false-value="0" ng-checked="true">
+                            </span>
+
+                        </div>
+
+                        <div ng-if="entity.goods.isEnableSpec==1">
+
+
+
+
+                            <div>
+
+                                <div class="row data-type">
+
+                                    <div>
+                                        <div class="col-md-2 title">屏幕尺寸</div>
+                                        <div class="col-md-10 data">
+
+                                                 <span>
+                                                     <input type="checkbox">4.0
+                                                 </span>
+                                            <span>
+                                                     <input type="checkbox">4.5
+                                                 </span>
+                                            <span>
+                                                     <input type="checkbox">5.0
+                                                 </span>
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-2 title">网络制式</div>
+                                        <div class="col-md-10 data">
+
+                                                 <span>
+                                                     <input type="checkbox">2G
+                                                 </span>
+                                            <span>
+                                                     <input type="checkbox">3G
+                                                 </span>
+                                            <span>
+                                                     <input type="checkbox">4G
+                                                 </span>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row data-type">
+                                    <table class="table table-bordered table-striped table-hover dataTable">
+                                        <thead>
+                                        <tr>
+                                            <th class="sorting" ng-repeat="item in entity.goodsDesc.specificationItems">
+                                                {{item.attributeName}}
+                                            </th>
+                                            <th class="sorting">价格</th>
+                                            <th class="sorting">库存</th>
+                                            <th class="sorting">是否启用</th>
+                                            <th class="sorting">是否默认</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="pojo in entity.itemList">
+                                            <td ng-repeat="item in entity.goodsDesc.specificationItems">
+                                                {{pojo.spec[item.attributeName]}}
+                                            </td>
+                                            <td>
+                                                <input class="form-control" ng-model="pojo.price" placeholder="价格">
+                                            </td>
+                                            <td>
+                                                <input class="form-control" ng-model="pojo.num" placeholder="库存数量">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" ng-model="pojo.status" ng-true-value="1"
+                                                       ng-false-value="0">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" ng-model="pojo.isDefault" ng-true-value="1"
+                                                       ng-false-value="0">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!--<div class="col-md-10 data">
                             <input type="checkbox">
                             <button type="button" class="btn btn-default" title="自定义规格" data-target="#mySpecModal"
                                     data-toggle="modal"><i class="fa fa-file-o"></i> 自定义规格
                             </button>
-                        </div>
+                        </div>-->
                     </div>
                     <p>
 
-                    <div>
+                        <!--<div>
 
-                        <div class="row data-type">
+                            <div class="row data-type">
 
-                            <div>
-                                <div class="col-md-2 title">屏幕尺寸</div>
-                                <div class="col-md-10 data">
-					                               
-					                            <span>
-					                            	<input type="checkbox">4.0
-					                            </span>
-                                    <span>
-					                            	<input type="checkbox">4.5
-					                            </span>
-                                    <span>
-					                            	<input type="checkbox">5.0
-					                            </span>
+                                <div>
+                                    <div class="col-md-2 title">屏幕尺寸</div>
+                                    <div class="col-md-10 data">
 
+                                                    <span>
+                                                        <input type="checkbox">4.0
+                                                    </span>
+                                        <span>
+                                                        <input type="checkbox">4.5
+                                                    </span>
+                                        <span>
+                                                        <input type="checkbox">5.0
+                                                    </span>
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="col-md-2 title">网络制式</div>
-                                <div class="col-md-10 data">
-					                               
-					                            <span>
-					                            	<input type="checkbox">2G
-					                            </span>
-                                    <span>
-					                            	<input type="checkbox">3G
-					                            </span>
-                                    <span>
-					                            	<input type="checkbox">4G
-					                            </span>
+                                <div>
+                                    <div class="col-md-2 title">网络制式</div>
+                                    <div class="col-md-10 data">
 
+                                                    <span>
+                                                        <input type="checkbox">2G
+                                                    </span>
+                                        <span>
+                                                        <input type="checkbox">3G
+                                                    </span>
+                                        <span>
+                                                        <input type="checkbox">4G
+                                                    </span>
+
+                                    </div>
                                 </div>
+
                             </div>
 
-                        </div>
 
+                            <div class="row data-type">
+                                <table class="table table-bordered table-striped table-hover dataTable">
+                                    <thead>
+                                    <tr>
+                                        <th class="sorting" ng-repeat="item in entity.goodsDesc.specificationItems">{{item.attributeName}}</th>
+                                        <th class="sorting">价格</th>
+                                        <th class="sorting">库存</th>
+                                        <th class="sorting">是否启用</th>
+                                        <th class="sorting">是否默认</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="pojo in entity.itemList">
+                                        <td ng-repeat="item in entity.goodsDesc.specificationItems">
+                                            {{pojo.spec[item.attributeName]}}
+                                        </td>
+                                        <td>
+                                            <input class="form-control" ng-model="pojo.price"  placeholder="价格">
+                                        </td>
+                                        <td>
+                                            <input class="form-control" ng-model="pojo.num" placeholder="库存数量">
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" ng-model="pojo.status" ng-true-value="1" ng-false-value="0" >
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" ng-model="pojo.isDefault" ng-true-value="1" ng-false-value="0">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
 
-                        <div class="row data-type">
-                            <table class="table table-bordered table-striped table-hover dataTable">
-                                <thead>
-                                <tr>
-                                    <th class="sorting">屏幕尺寸</th>
-                                    <th class="sorting">网络制式</th>
-                                    <th class="sorting">价格</th>
-                                    <th class="sorting">库存</th>
-                                    <th class="sorting">是否启用</th>
-                                    <th class="sorting">是否默认</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        4.0
-                                    </td>
-                                    <td>
-                                        3G
-                                    </td>
-                                    <td>
-                                        <input class="form-control" placeholder="价格">
-                                    </td>
-                                    <td>
-                                        <input class="form-control" placeholder="库存数量">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        4.0
-                                    </td>
-                                    <td>
-                                        4G
-                                    </td>
-                                    <td>
-                                        <input class="form-control" placeholder="价格">
-                                    </td>
-                                    <td>
-                                        <input class="form-control" placeholder="库存数量">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        5.0
-                                    </td>
-                                    <td>
-                                        3G
-                                    </td>
-                                    <td>
-                                        <input class="form-control" placeholder="价格">
-                                    </td>
-                                    <td>
-                                        <input class="form-control" placeholder="库存数量">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        5.0
-                                    </td>
-                                    <td>
-                                        4G
-                                    </td>
-                                    <td>
-                                        <input class="form-control" placeholder="价格">
-                                    </td>
-                                    <td>
-                                        <input class="form-control" placeholder="库存数量">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                </tr>
+                            </div>
 
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                    </div>
+                        </div>-->
                 </div>
 
             </div>
@@ -371,8 +415,8 @@
 
     </div>
     <div class="btn-toolbar list-toolbar">
-        <button class="btn btn-primary" ng-click="setEditorValue();add()"><i class="fa fa-save"></i>保存</button>
-        <button class="btn btn-default" ng-click="goListPage()">返回列表</button>
+        <button class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>保存</button>
+        <a href="goods.html" class="btn btn-default">返回列表</a>
     </div>
 
 </section>
