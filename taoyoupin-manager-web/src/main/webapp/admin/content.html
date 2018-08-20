@@ -14,10 +14,23 @@
     <link rel="stylesheet" href="../css/style.css">
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-    
+
+	<script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+
+	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+	<script src="../plugins/angularjs/pagination.js"></script>
+
+	<script type="text/javascript" src="../js/base_pagination.js"></script>
+	<script type="text/javascript" src="../js/service/uploadService.js"></script>
+	<script type="text/javascript" src="../js/service/contentService.js"></script>
+	<script type="text/javascript" src="../js/service/contentCategoryService.js"></script>
+	<script type="text/javascript" src="../js/controller/baseController.js"></script>
+	<script type="text/javascript" src="../js/controller/contentController.js"></script>
+
 </head>
 
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini"
+	  ng-app="pinyougou" ng-controller="contentController" ng-init="findContentCategoryList()">
   <!-- .box-body -->
                 
                     <div class="box-header with-border">
@@ -66,17 +79,18 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-			                          <tr>
-			                              <td><input  type="checkbox"></td>			                              
-				                          <td>1</td>
-									      <td>1</td>
-									      <td>促销海报1</td>
-									      <td>http://wwww.hb.com/hd1.html</td>
+			                          <tr ng-repeat="entity in list">
+			                              <td><input type="checkbox" ></td>
+				                          <td>{{entity.id}}</td>
+									      <td>{{showCategory(entity.categoryId).name}}</td>
+									      <td>{{entity.title}}</td>
+									      <!--<td>http://wwww.hb.com/hd1.html</td>-->
+										  <td>{{entity.url}}</td>
 									      <td>
-									      	<img alt="" src="" width="100px" height="50px">
+											  <img alt=""src="{{entity.pic}}"height="50px"width="100px">
 									      </td>
 									      <td>1</td>
-									      <td>有效</td>									     								     
+									      <td>{{status[entity.status]}}</td>
 		                                  <td class="text-center">                                           
 		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">修改</button>                                           
 		                                  </td>
@@ -86,6 +100,11 @@
 			                  <!--数据列表/--> 
                         </div>
                         <!-- 数据表格 /-->
+
+
+						<tm-pagination conf="paginationConf"></tm-pagination>
+
+
                      </div>
                     <!-- /.box-body -->
 
@@ -104,8 +123,8 @@
 				<tr>
 		      		<td>广告分类</td>
 		      		<td>
-		      			<select class="form-control" ng-model="entity.categoryId" ng-options="item.id as item.name for item in options['content_category'].data">
-		                </select>
+						<select class="form-control"ng-model="entity.categoryId"
+								ng-options="item.id as item.name for item in contentCategoryList">
 		      		</td>
 		      	</tr>
 		      	<tr>
@@ -141,14 +160,15 @@
 		      	<tr>
 		      		<td>是否有效</td>
 		      		<td>
-		      		   <input type="checkbox" class="icheckbox_square-blue" >
+						<input type="checkbox" ng-model="entity.status"
+							   ng-true-value="1" ng-false-value="0" >
 		      		</td>
 		      	</tr>  	
 			 </table>				
 			
 		</div>
 		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true">保存</button>
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
 		</div>
 	  </div>

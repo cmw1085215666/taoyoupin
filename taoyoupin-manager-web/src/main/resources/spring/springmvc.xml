@@ -4,6 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <context:property-placeholder location="classpath:resouce.properties"></context:property-placeholder>
 
     <!--配置应用名 服务消费方-->
     <dubbo:application name="taoyoupin-manager-web"></dubbo:application>
@@ -43,7 +44,13 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <!-- 设定文件上传的最大值 5MB，5*1024*1024 -->
+        <property name="maxUploadSize" value="5242880"></property>
+    </bean>
+    <!--<context:property-placeholder location="classpath:config/*.properties"></context:property-placeholder>-->
     <!--<bean id="handlerExceptionResolver" class="com.itheima.exception.CustomExceptionResolver"/>-->
 
     <!--自定义的异常处理器如果在controller报下则不用配置<bean></bean>标签让spring托管-->

@@ -1,5 +1,5 @@
  //控制层 
-app.controller('contentController' ,function($scope,$controller   ,contentService){	
+app.controller('contentController' ,function($scope,$controller,contentCategoryService ,uploadService  ,contentService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -75,5 +75,46 @@ app.controller('contentController' ,function($scope,$controller   ,contentServic
 			}			
 		);
 	}
-    
+
+    $scope.entity={pic:""};
+    //上传广告图
+    $scope.uploadFile=function(){
+        uploadService.uploadFile().success(
+            function(response){
+                if(response.success){
+                    $scope.entity.pic=response.message;
+                }else{
+                    alert("上传失败！");
+                }
+            }
+        ).error(
+            function(){
+                alert("上传出错！");
+            }
+        );
+    }
+
+    //加载广告分类列表
+    $scope.findContentCategoryList=function(){
+        contentCategoryService.findAll().success(
+            function(response){
+                $scope.contentCategoryList=response;
+            }
+        );
+    }
+
+    $scope.status=["无效","有效"];
+
+    $scope.showCategory=function (categoryid) {
+         var objCategory =$scope.contentCategoryList;
+    	for(var i = 0;i<objCategory.length;i++ ){
+    		if(objCategory[i].id == categoryid){
+    			return objCategory[i];
+			}
+		}
+
+		return null;
+    }
+
+
 });	
