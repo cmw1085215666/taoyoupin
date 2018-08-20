@@ -17,6 +17,7 @@
         <module>taoyouqin-shop-web</module>
         <module>taoyoupin-content-interface</module>
         <module>taoyoupin-content-service</module>
+        <module>taoyoupin-portal-web</module>
     </modules>
     <packaging>pom</packaging>
 

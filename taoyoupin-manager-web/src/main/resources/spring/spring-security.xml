@@ -37,7 +37,7 @@
     <!-- 引用dubbo 服务 -->
     <dubbo:application name="taoyoupin-manager-web" />
     <dubbo:registry address="zookeeper://192.168.25.133:2181"/>
-    <dubbo:reference id="sellerService"  interface="com.taoyoupin.sellergoods.service.SellerService" >
+    <dubbo:reference  id="sellerService"  interface="com.taoyoupin.sellergoods.service.SellerService" >
     </dubbo:reference>
     <beans:bean id="userDetailService" class="com.taoyoupin.service.UserDetailsServiceImplManager">
         <beans:property name="sellerService" ref="sellerService"/>

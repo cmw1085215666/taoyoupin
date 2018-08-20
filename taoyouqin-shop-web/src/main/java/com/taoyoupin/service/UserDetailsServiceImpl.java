@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     private SellerService sellerService;
     public void setSellerService(SellerService sellerService) {
         this.sellerService = sellerService;
