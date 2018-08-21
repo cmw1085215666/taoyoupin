@@ -89,10 +89,11 @@
 									      <td>
 											  <img alt=""src="{{entity.pic}}"height="50px"width="100px">
 									      </td>
-									      <td>1</td>
+									      <td>{{entity.sortOrder}}</td>
 									      <td>{{status[entity.status]}}</td>
 		                                  <td class="text-center">                                           
-		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">修改</button>                                           
+		                                 	  <button type="button" class="btn bg-olive btn-xs" ng-click="findOne(entity.id)"
+													  data-toggle="modal" data-target="#editModal">修改</button>
 		                                  </td>
 			                          </tr>
 			                      </tbody>
