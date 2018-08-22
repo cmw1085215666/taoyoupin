@@ -132,7 +132,7 @@ public class ContentServiceImpl implements ContentService {
 
 	@Override
 	public List<TbContent> findByCategoryId(Long categoryId) {
-
+		System.out.println("----------->>>>获取数据");
 		List<TbContent> list = (List<TbContent>) redisTemplate.boundHashOps("content").get(categoryId);
 
 		if (list==null){
