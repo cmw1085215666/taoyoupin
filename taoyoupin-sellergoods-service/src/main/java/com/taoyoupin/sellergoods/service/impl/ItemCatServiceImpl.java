@@ -11,6 +11,7 @@ import com.taoyoupin.pojo.TbItemCatExample.Criteria;
 import com.taoyoupin.sellergoods.service.ItemCatService;
 
 import entity.PageResult;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * 服务实现层
@@ -104,7 +105,19 @@ public class ItemCatServiceImpl implements ItemCatService {
 		TbItemCatExample example1=new TbItemCatExample();
 		Criteria criteria1 = example1.createCriteria();
 		criteria1.andParentIdEqualTo(parentId);
+
+		//每次执行查询的时候，一次性读取缓存进行存储 (因为每次增删改都要执行此方法)
+		List<TbItemCat> list = findAll();
+		for(TbItemCat itemCat:list){
+			redisTemplate.boundHashOps("itemCat").put(itemCat.getName(), itemCat.getTypeId());
+		}
+
 		return  itemCatMapper.selectByExample(example1);
 	}
+
+
+	@Autowired
+	private RedisTemplate redisTemplate;
+
 
 }

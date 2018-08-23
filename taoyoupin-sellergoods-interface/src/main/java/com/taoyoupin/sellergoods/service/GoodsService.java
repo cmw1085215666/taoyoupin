@@ -2,6 +2,7 @@ package com.taoyoupin.sellergoods.service;
 import java.util.List;
 import com.taoyoupin.pojo.TbGoods;
 
+import com.taoyoupin.pojo.TbItem;
 import entity.Goods;
 import entity.PageResult;
 /**
@@ -70,5 +71,13 @@ public interface GoodsService {
 	 * @param status
 	 */
 	public void updateStatus(Long [] ids,String status);
+
+	/**
+	 * 根据商品ID和状态查询Item表信息
+	 * @param goodsId
+	 * @param status
+	 * @return
+	 */
+	public List<TbItem> findItemListByGoodsIdandStatus(Long[] goodsIds, String status );
 
 }

@@ -20,6 +20,8 @@
         <module>taoyoupin-portal-web</module>
         <module>taoyoupin-solr-util</module>
         <module>taoyoupin-search-interface</module>
+        <module>taoyoupin-search-service</module>
+        <module>taoyouqin-search-web</module>
     </modules>
     <packaging>pom</packaging>
 

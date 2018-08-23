@@ -3,9 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
+
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-   <!-- <context:property-placeholder location="classpath:properties/*.properties"/>-->
+    <!--<content:property-placeholder location="classpath:properties/*.properties"></content:property-placeholder>-->
+    <!--<context:property-placeholder location="classpath:properties/*.properties"/>-->
+    <!--<context:property-placeholder location="classpath:properties/*.properties"/>-->
     <!-- redis 相关配置 -->
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="${redis.maxIdle}"/>
